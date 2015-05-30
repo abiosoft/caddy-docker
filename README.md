@@ -2,7 +2,7 @@
 
 A [Docker](http://docker.com) image for [Caddy](http://caddyserver.com).
 
-[![](https://badge.imagelayers.io/abiosoft/caddy:latest.svg)](https://imagelayers.io/?images=abiosoft/caddy:latest 'Get your own badge on imagelayers.io')
+[![](https://badge.imagelayers.io/abiosoft/caddy:0.7.0.svg)](https://imagelayers.io/?images=abiosoft/caddy:0.7.0 'Get your own badge on imagelayers.io')
 
 ### Getting Started
 
