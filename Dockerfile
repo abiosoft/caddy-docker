@@ -1,7 +1,7 @@
 FROM alpine:latest
 MAINTAINER Abiola Ibrahim <abiola89@gmail.com>
 
-RUN apk add --update openssh git
+RUN apk add --update openssh-client git
 
 RUN mkdir /caddysrc \
 && cd /caddysrc \
@@ -9,7 +9,8 @@ RUN mkdir /caddysrc \
 && unzip caddy_linux_amd64.zip \
 && mv caddy /usr/bin/caddy \
 && chmod 755 /usr/bin/caddy \
-&& rm -rf /caddysrc
+&& rm -rf /caddysrc \
+&& printf "0.0.0.0\nbrowse" > /etc/Caddyfile
 
 RUN mkdir /srv
 
