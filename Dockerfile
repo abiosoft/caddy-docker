@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.1
 MAINTAINER Abiola Ibrahim <abiola89@gmail.com>
 
 RUN apk add --update openssh-client git
