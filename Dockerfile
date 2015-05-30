@@ -1,7 +1,7 @@
 FROM alpine:latest
 MAINTAINER Abiola Ibrahim <abiola89@gmail.com>
 
-RUN apk add --update openssh git
+RUN apk add --update openssh-client git
 
 RUN mkdir /caddysrc \
 && cd /caddysrc \
