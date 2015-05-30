@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER Abiola Ibrahim
+MAINTAINER Abiola Ibrahim <abiola89@gmail.com>
 
 RUN apk add --update openssh git
 
