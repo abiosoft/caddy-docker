@@ -18,4 +18,5 @@ EXPOSE 2015
 
 WORKDIR /srv
 
-CMD /usr/bin/caddy --conf /etc/Caddyfile
+ENTRYPOINT ["/usr/bin/caddy"]
+CMD ["--conf", "/etc/Caddyfile"]
