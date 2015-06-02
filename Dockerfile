@@ -5,7 +5,7 @@ RUN apk add --update openssh-client git
 
 RUN mkdir /caddysrc \
 && cd /caddysrc \
-&& curl -sLO https://github.com/mholt/caddy/releases/download/v0.7.0/caddy_linux_amd64.zip\
+&& curl -sLO https://github.com/mholt/caddy/releases/download/v0.7.1/caddy_linux_amd64.zip\
 && unzip caddy_linux_amd64.zip \
 && mv caddy /usr/bin/caddy \
 && chmod 755 /usr/bin/caddy \
