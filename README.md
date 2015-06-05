@@ -57,3 +57,8 @@ Replace `/path/to/Caddyfile` and `/path/to/sites/root` accordingly.
 ```
 $ docker run -d -v /path/to/sites/root:/srv -v path/to/Caddyfile:/etc/Caddyfile -p 2015:2015 abiosoft/caddy
 ```
+
+## Notes
+The Caddy binary is still downloaded from [Caddy's GitHub releases page](https://github.com/mholt/caddy/releases). An open source tool ([ghrelease](https://github.com/abiosoft/ghrelease)) is used to retrieve the download URL from GitHub because GitHub do not provide link for latest release archive.
+
+This is only used in `latest` tag, `Dockerfile` for other specific version tags uses GitHub download link directly.
