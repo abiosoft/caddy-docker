@@ -23,7 +23,7 @@ Caddy can serve sites from git repository using [git](https://caddyserver.com/do
 Replace `github.com/abiosoft/webtest` with your repository.
 
 ```
-$ prinf "0.0.0.0\ngit github.com/abiosoft/webtest" > Caddyfile
+$ printf "0.0.0.0\ngit github.com/abiosoft/webtest" > Caddyfile
 ```
 
 ##### Run the image
