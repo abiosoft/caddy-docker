@@ -66,7 +66,7 @@ Add email to your Caddyfile to avoid prompt at runtime. Replace `user@host.com` 
 tls user@host.com
 ```
 
-#### Run the image
+##### Run the image
 
 You can change the the ports if ports 80 and 443 are not available on host. e.g. 81:80, 444:443
 
