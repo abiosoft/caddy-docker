@@ -16,6 +16,8 @@ RUN mkdir /caddysrc \
 RUN mkdir /srv
 
 EXPOSE 2015
+EXPOSE 443
+EXPOSE 80
 
 WORKDIR /srv
 
