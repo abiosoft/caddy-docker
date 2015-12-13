@@ -71,11 +71,11 @@ tls user@host.com
 You can change the the ports if ports 80 and 443 are not available on host. e.g. 81:80, 444:443
 
 ```
-$ docker run -d -v /path/to/sites/root:/srv -v `pwd`/Caddyfile:/etc/Caddyfile -p 80:80 -p 443:443 abiosoft/caddy
+$ docker run -d -v `pwd`/Caddyfile:/etc/Caddyfile -p 80:80 -p 443:443 abiosoft/caddy
 ```
 
 **Optional** but advised. Save certificates on host machine to prevent regeneration every time container starts.
 
 ```
-$ docker run -d -v /path/to/sites/root:/srv -v `pwd`/Caddyfile:/etc/Caddyfile -v $HOME/.caddy:/root/.caddy -p 80:80 -p 443:443 abiosoft/caddy
+$ docker run -d -v `pwd`/Caddyfile:/etc/Caddyfile -v $HOME/.caddy:/root/.caddy -p 80:80 -p 443:443 abiosoft/caddy
 ```
