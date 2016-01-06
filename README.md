@@ -14,6 +14,21 @@ $ docker run -d -v `pwd`:/srv -p 2015:2015 abiosoft/caddy
 
 Point your browser to `http://127.0.0.1:2015`.
 
+### PHP
+`:[<version>-]php` variant of this image bundles PHP-FPM. e.g. `:php`, `:0.8.0-php`
+```
+$ docker run -d -p 2015:2015 abiosoft/caddy:php
+```
+Point your browser to `http://127.0.0.1:2015` and you will see a php info page.
+
+##### Local php source
+
+Replace `/path/to/php/src` with your php sources directory.
+```
+$ docker run -d -v /path/to/php/src:/srv -p 2015:2015 abiosoft/caddy:php
+```
+Point your browser to `http://127.0.0.1:2015`.
+
 ### Using git sources
 
 Caddy can serve sites from git repository using [git](https://caddyserver.com/docs/git) middleware.
@@ -43,6 +58,7 @@ The image contains a default Caddyfile.
 0.0.0.0
 browse
 ```
+In the PHP variant, `browse` is swapped with `fastcgi / 127.0.0.1:9000 php`.
 
 #### Paths in container
 
