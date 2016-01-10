@@ -3,9 +3,12 @@ MAINTAINER Abiola Ibrahim <abiola89@gmail.com>
 
 LABEL caddy_version="0.8" architecture="amd64"
 
-RUN apk add --update openssh-client git tar php-fpm php-mysql php-mysqli
+RUN apk add --update openssh-client git tar php-fpm 
 
-# Allow environment variable access.
+# essential php libs
+RUN apk add php-curl php-gd php-zip php-iconv php-sqlite3 php-mysql php-mysqli 
+
+# allow environment variable access.
 RUN echo "clear_env = no" >> /etc/php/php-fpm.conf
 
 RUN mkdir /caddysrc \
