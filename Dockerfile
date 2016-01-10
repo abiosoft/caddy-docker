@@ -5,6 +5,9 @@ LABEL caddy_version="0.8" architecture="amd64"
 
 RUN apk add --update openssh-client git tar php-fpm php-mysql php-mysqli
 
+# Allow environment variable access.
+RUN echo "clear_env = no" >> /etc/php/php-fpm.conf
+
 RUN mkdir /caddysrc \
 && curl -sL -o /caddysrc/caddy_linux_amd64.tar.gz "http://caddyserver.com/download/build?os=linux&arch=amd64&features=git" \
 && tar -xf /caddysrc/caddy_linux_amd64.tar.gz -C /caddysrc \
