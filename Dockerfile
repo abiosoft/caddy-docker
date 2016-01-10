@@ -3,7 +3,7 @@ MAINTAINER Abiola Ibrahim <abiola89@gmail.com>
 
 LABEL caddy_version="0.8" architecture="amd64"
 
-RUN apk add --update openssh-client git tar php-fpm
+RUN apk add --update openssh-client git tar php-fpm php-mysql php-mysqli
 
 RUN mkdir /caddysrc \
 && curl -sL -o /caddysrc/caddy_linux_amd64.tar.gz "http://caddyserver.com/download/build?os=linux&arch=amd64&features=git" \
