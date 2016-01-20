@@ -29,6 +29,9 @@ $ docker run -d -v /path/to/php/src:/srv -p 2015:2015 abiosoft/caddy:php
 ```
 Point your browser to `http://127.0.0.1:2015`.
 
+##### Note
+Your `Caddyfile` must include the line `startup php-fpm`. This is necessary for Caddy to be PID 1 in the container.
+
 ### Using git sources
 
 Caddy can serve sites from git repository using [git](https://caddyserver.com/docs/git) middleware.
@@ -57,8 +60,10 @@ The image contains a default Caddyfile.
 ```
 0.0.0.0
 browse
+fastcgi / 127.0.0.1:9000 php # php variant only
+startup php-fpm # php variant only
 ```
-In the PHP variant, `browse` is swapped with `fastcgi / 127.0.0.1:9000 php`.
+The last 2 lines are only present in the php variant.
 
 #### Paths in container
 
