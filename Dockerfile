@@ -5,20 +5,16 @@ LABEL caddy_version="0.8.2" architecture="amd64"
 
 RUN apk add --update openssh-client git tar
 
-RUN mkdir /caddysrc \
-&& curl -sL -o /caddysrc/caddy_linux_amd64.tar.gz "http://caddyserver.com/download/build?os=linux&arch=amd64&features=git" \
-&& tar -xf /caddysrc/caddy_linux_amd64.tar.gz -C /caddysrc \
-&& mv /caddysrc/caddy /usr/bin/caddy \
-&& chmod 755 /usr/bin/caddy \
-&& rm -rf /caddysrc \
-&& printf "0.0.0.0\nbrowse" > /etc/Caddyfile
+RUN curl --silent --show-error --fail --location \
+      --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
+      "https://caddyserver.com/download/build?os=linux&arch=amd64&features=git" \
+    | tar --no-same-owner -C /usr/bin/ -xz caddy \
+ && chmod 0755 /usr/bin/caddy \
+ && printf "0.0.0.0\nbrowse" > /etc/Caddyfile \
+ && /usr/bin/caddy -version
 
-RUN mkdir /srv
-
-EXPOSE 2015
-EXPOSE 443
-EXPOSE 80
-
+EXPOSE 80 443 2015
+VOLUME /srv
 WORKDIR /srv
 
 ENTRYPOINT ["/usr/bin/caddy"]
