@@ -8,15 +8,15 @@ A [Docker](http://docker.com) image for [Caddy](http://caddyserver.com). This im
 
 ### Serve current directory
 
-```
-$ docker run -d -v `pwd`:/srv -p 2015:2015 abiosoft/caddy
+```sh
+$ docker run -d -v $(pwd):/srv -p 2015:2015 abiosoft/caddy
 ```
 
 Point your browser to `http://127.0.0.1:2015`.
 
 ### PHP
 `:[<version>-]php` variant of this image bundles PHP-FPM. e.g. `:php`, `:0.8.0-php`
-```
+```sh
 $ docker run -d -p 2015:2015 abiosoft/caddy:php
 ```
 Point your browser to `http://127.0.0.1:2015` and you will see a php info page.
@@ -24,7 +24,7 @@ Point your browser to `http://127.0.0.1:2015` and you will see a php info page.
 ##### Local php source
 
 Replace `/path/to/php/src` with your php sources directory.
-```
+```sh
 $ docker run -d -v /path/to/php/src:/srv -p 2015:2015 abiosoft/caddy:php
 ```
 Point your browser to `http://127.0.0.1:2015`.
@@ -40,14 +40,14 @@ Caddy can serve sites from git repository using [git](https://caddyserver.com/do
 
 Replace `github.com/abiosoft/webtest` with your repository.
 
-```
+```sh
 $ printf "0.0.0.0\ngit github.com/abiosoft/webtest" > Caddyfile
 ```
 
 ##### Run the image
 
-```
-$ docker run -d -v `pwd`/Caddyfile:/etc/Caddyfile -p 2015:2015 abiosoft/caddy
+```sh
+$ docker run -d -v $(pwd)/Caddyfile:/etc/Caddyfile -p 2015:2015 abiosoft/caddy
 ```
 Point your browser to `http://127.0.0.1:2015`.
 
@@ -75,8 +75,12 @@ Sites root: `/srv`
 
 Replace `/path/to/Caddyfile` and `/path/to/sites/root` accordingly.
 
-```
-$ docker run -d -v /path/to/sites/root:/srv -v path/to/Caddyfile:/etc/Caddyfile -p 2015:2015 abiosoft/caddy
+```sh
+$ docker run -d \
+    -v /path/to/sites/root:/srv \
+    -v path/to/Caddyfile:/etc/Caddyfile \
+    -p 2015:2015 \
+    abiosoft/caddy
 ```
 
 ### Let's Encrypt Auto SSL
@@ -91,12 +95,19 @@ tls user@host.com
 
 You can change the the ports if ports 80 and 443 are not available on host. e.g. 81:80, 444:443
 
-```
-$ docker run -d -v `pwd`/Caddyfile:/etc/Caddyfile -p 80:80 -p 443:443 abiosoft/caddy
+```sh
+$ docker run -d \
+    -v $(pwd)/Caddyfile:/etc/Caddyfile \
+    -p 80:80 -p 443:443 \
+    abiosoft/caddy
 ```
 
 **Optional** but advised. Save certificates on host machine to prevent regeneration every time container starts.
 
-```
-$ docker run -d -v `pwd`/Caddyfile:/etc/Caddyfile -v $HOME/.caddy:/root/.caddy -p 80:80 -p 443:443 abiosoft/caddy
+```sh
+$ docker run -d \
+    -v $(pwd)/Caddyfile:/etc/Caddyfile \
+    -v $HOME/.caddy:/root/.caddy \
+    -p 80:80 -p 443:443 \
+    abiosoft/caddy
 ```
