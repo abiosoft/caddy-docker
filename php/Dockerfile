@@ -23,7 +23,7 @@ EXPOSE 80 443 2015
 VOLUME /srv
 WORKDIR /srv
 
-ADD php/index.php /srv/index.php
+ADD index.php /srv/index.php
 
 ENTRYPOINT ["/usr/bin/caddy"]
 CMD ["--conf", "/etc/Caddyfile"]
