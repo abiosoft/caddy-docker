@@ -1,4 +1,4 @@
-# caddy-docker
+# caddy
 
 A [Docker](http://docker.com) image for [Caddy](http://caddyserver.com). This image includes the [git](http://caddyserver.com/docs/git) addon.
 

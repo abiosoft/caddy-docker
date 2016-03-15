@@ -10,12 +10,14 @@ RUN curl --silent --show-error --fail --location \
       "https://caddyserver.com/download/build?os=linux&arch=amd64&features=git" \
     | tar --no-same-owner -C /usr/bin/ -xz caddy \
  && chmod 0755 /usr/bin/caddy \
- && printf "0.0.0.0\nbrowse" > /etc/Caddyfile \
  && /usr/bin/caddy -version
 
 EXPOSE 80 443 2015
 VOLUME /srv
 WORKDIR /srv
+
+ADD Caddyfile /etc/Caddyfile
+ADD index.html /srv/index.html
 
 ENTRYPOINT ["/usr/bin/caddy"]
 CMD ["--conf", "/etc/Caddyfile"]
