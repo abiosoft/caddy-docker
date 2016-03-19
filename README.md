@@ -6,10 +6,8 @@ A [Docker](http://docker.com) image for [Caddy](http://caddyserver.com). This im
 
 ## Getting Started
 
-### Serve current directory
-
 ```sh
-$ docker run -d -v $(pwd):/srv -p 2015:2015 abiosoft/caddy
+$ docker run -d -p 2015:2015 abiosoft/caddy
 ```
 
 Point your browser to `http://127.0.0.1:2015`.
@@ -30,7 +28,7 @@ $ docker run -d -v /path/to/php/src:/srv -p 2015:2015 abiosoft/caddy:php
 Point your browser to `http://127.0.0.1:2015`.
 
 ##### Note
-Your `Caddyfile` must include the line `startup php-fpm`. This is necessary for Caddy to be PID 1 in the container.
+Your `Caddyfile` must include the line `startup php-fpm`. For Caddy to be PID 1 in the container, php-fpm could not be started.
 
 ### Using git sources
 
@@ -86,8 +84,10 @@ $ docker run -d \
 ### Let's Encrypt Auto SSL
 **Note** that this does not work on local environments.
 
-Add email to your Caddyfile to avoid prompt at runtime. Replace `user@host.com` with your email.
+Use a valid domain and add email to your Caddyfile to avoid prompt at runtime. 
+Replace `mydomain.com` with your domain and `user@host.com` with your email.
 ```
+mydomain.com
 tls user@host.com
 ```
 
@@ -103,7 +103,7 @@ $ docker run -d \
 ```
 
 **Optional** but advised. Save certificates on host machine to prevent regeneration every time container starts.
-
+Let's Encrypt has [rate limit](https://community.letsencrypt.org/t/rate-limits-for-lets-encrypt/6769).
 ```sh
 $ docker run -d \
     -v $(pwd)/Caddyfile:/etc/Caddyfile \
