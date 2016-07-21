@@ -1,7 +1,7 @@
 FROM alpine:3.2
 MAINTAINER Abiola Ibrahim <abiola89@gmail.com>
 
-LABEL caddy_version="0.8.3" architecture="amd64"
+LABEL caddy_version="0.9.0" architecture="amd64"
 
 RUN apk add --update openssh-client git tar
 
