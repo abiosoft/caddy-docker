@@ -13,7 +13,7 @@ $ docker run -d -p 2015:2015 abiosoft/caddy
 Point your browser to `http://127.0.0.1:2015`.
 
 ### PHP
-`:[<version>-]php` variant of this image bundles PHP-FPM alongside essential php libraries and [composer](https://getcomposer.org). e.g. `:php`, `:0.8.0-php`
+`:[<version>-]php` variant of this image bundles PHP-FPM alongside essential php extenstions and [composer](https://getcomposer.org). e.g. `:php`, `:0.8.0-php`
 ```sh
 $ docker run -d -p 2015:2015 abiosoft/caddy:php
 ```
