@@ -6,7 +6,13 @@ LABEL caddy_version="0.9.0" architecture="amd64"
 RUN apk add --update openssh-client git tar php-fpm
 
 # essential php libs
-RUN apk add php-curl php-gd php-zip php-iconv php-sqlite3 php-mysql php-mysqli php-json
+RUN apk add php-curl php-gd php-zip php-iconv php-sqlite3 php-mysql php-mysqli php-json php-phar php-openssl
+
+# composer
+RUN curl --silent --show-error --fail --location \
+      --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" \
+      "https://getcomposer.org/installer" \
+    | php -- --install-dir=/usr/bin --filename=composer
 
 # allow environment variable access.
 RUN echo "clear_env = no" >> /etc/php/php-fpm.conf
