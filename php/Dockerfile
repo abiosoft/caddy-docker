@@ -1,12 +1,12 @@
-FROM alpine:3.2
+FROM alpine:3.4
 MAINTAINER Abiola Ibrahim <abiola89@gmail.com>
 
-LABEL caddy_version="0.9.0" architecture="amd64"
+LABEL caddy_version="0.9.1" architecture="amd64"
 
-RUN apk add --update openssh-client git tar php-fpm
+RUN apk add --update --no-cache openssh-client git tar php5-fpm curl
 
 # essential php libs
-RUN apk add php-curl php-gd php-zip php-iconv php-sqlite3 php-mysql php-mysqli php-json php-phar php-openssl
+RUN apk add --no-cache php5-curl php5-gd php5-zip php5-iconv php5-sqlite3 php5-mysql php5-mysqli php5-pgsql php5-json php5-phar php5-openssl
 
 # composer
 RUN curl --silent --show-error --fail --location \
@@ -15,7 +15,7 @@ RUN curl --silent --show-error --fail --location \
     | php -- --install-dir=/usr/bin --filename=composer
 
 # allow environment variable access.
-RUN echo "clear_env = no" >> /etc/php/php-fpm.conf
+RUN echo "clear_env = no" >> /etc/php5/php-fpm.conf
 
 RUN curl --silent --show-error --fail --location \
       --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \

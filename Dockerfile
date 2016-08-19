@@ -1,9 +1,9 @@
-FROM alpine:3.2
+FROM alpine:3.4
 MAINTAINER Abiola Ibrahim <abiola89@gmail.com>
 
-LABEL caddy_version="0.9.0" architecture="amd64"
+LABEL caddy_version="0.9.1" architecture="amd64"
 
-RUN apk add --update openssh-client git tar
+RUN apk add --update --no-cache openssh-client git tar curl
 
 RUN curl --silent --show-error --fail --location \
       --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
