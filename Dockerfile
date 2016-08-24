@@ -13,7 +13,6 @@ RUN curl --silent --show-error --fail --location \
  && /usr/bin/caddy -version
 
 EXPOSE 80 443 2015
-VOLUME /srv
 WORKDIR /srv
 
 ADD Caddyfile /etc/Caddyfile
