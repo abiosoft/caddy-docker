@@ -3,6 +3,8 @@ MAINTAINER Abiola Ibrahim <abiola89@gmail.com>
 
 LABEL caddy_version="0.9.1" architecture="amd64"
 
+ARG plugins=git,ipfilter
+
 RUN apk add --update --no-cache openssh-client git tar php5-fpm curl
 
 # essential php libs
@@ -19,7 +21,7 @@ RUN echo "clear_env = no" >> /etc/php5/php-fpm.conf
 
 RUN curl --silent --show-error --fail --location \
       --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
-      "https://caddyserver.com/download/build?os=linux&arch=amd64&features=git" \
+      "https://caddyserver.com/download/build?os=linux&arch=amd64&features=${plugins}" \
     | tar --no-same-owner -C /usr/bin/ -xz caddy \
  && chmod 0755 /usr/bin/caddy \
  && /usr/bin/caddy -version
