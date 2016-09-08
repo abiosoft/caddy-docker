@@ -3,9 +3,9 @@ MAINTAINER Abiola Ibrahim <abiola89@gmail.com>
 
 LABEL caddy_version="0.9.1" architecture="amd64"
 
-ARG plugins=git,ipfilter
+ARG plugins=git
 
-RUN apk add --update --no-cache openssh-client git libcap tar curl
+RUN apk add --no-cache openssh-client git libcap tar curl
 
 RUN curl --silent --show-error --fail --location \
       --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
@@ -22,6 +22,9 @@ WORKDIR /srv
 
 COPY Caddyfile /etc/Caddyfile
 COPY index.html /srv/index.html
+
+# grant necessary permission
+RUN chown -R caddy:caddy /srv
 
 USER caddy
 
