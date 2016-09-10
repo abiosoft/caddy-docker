@@ -32,7 +32,7 @@ Your `Caddyfile` must include the line `startup php-fpm`. For Caddy to be PID 1 
 
 ### Using git sources
 
-Caddy can serve sites from git repository using [git](https://caddyserver.com/docs/git) middleware.
+Caddy can serve sites from git repository using [git](https://caddyserver.com/docs/git) plugin.
 
 ##### Create Caddyfile
 
@@ -107,7 +107,7 @@ Let's Encrypt has [rate limit](https://community.letsencrypt.org/t/rate-limits-f
 ```sh
 $ docker run -d \
     -v $(pwd)/Caddyfile:/etc/Caddyfile \
-    -v $HOME/.caddy:/root/.caddy \
+    -v $HOME/.caddy:/home/caddy/.caddy \
     -p 80:80 -p 443:443 \
     abiosoft/caddy
 ```
