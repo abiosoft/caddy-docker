@@ -13,7 +13,7 @@ RUN curl --silent --show-error --fail --location \
     | tar --no-same-owner -C /usr/bin/ -xz caddy \
  && chmod 0755 /usr/bin/caddy \
  && addgroup -S caddy \
- && adduser -D -S -H -s /sbin/nologin -G caddy caddy \
+ && adduser -D -S -s /sbin/nologin -G caddy caddy \
  && setcap cap_net_bind_service=+ep /usr/bin/caddy \
  && /usr/bin/caddy -version
 
