@@ -112,9 +112,7 @@ $ docker run -d \
     abiosoft/caddy
 ```
 ##### Note
-Following [best practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#/user),
-a non-privileged user `caddy` is used in the container. However, if you run into permission issues with mounted volumes, you can start
-the container with root.
+Following [best practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#/user), a non-privileged user `caddy` is used in the container. However, if you run into permission issues with mounted volumes, you can start the container with root.
 ```sh
 $ docker run -d -u root abiosoft/caddy
 ```
