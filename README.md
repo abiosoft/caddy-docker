@@ -84,7 +84,7 @@ $ docker run -d \
 ### Let's Encrypt Auto SSL
 **Note** that this does not work on local environments.
 
-Use a valid domain and add email to your Caddyfile to avoid prompt at runtime. 
+Use a valid domain and add email to your Caddyfile to avoid prompt at runtime.
 Replace `mydomain.com` with your domain and `user@host.com` with your email.
 ```
 mydomain.com
@@ -110,4 +110,11 @@ $ docker run -d \
     -v $HOME/.caddy:/home/caddy/.caddy \
     -p 80:80 -p 443:443 \
     abiosoft/caddy
+```
+##### Note
+Following [best practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#/user),
+a non-privileged user `caddy` is used in the container. However, if you run into permission issues with mounted volumes, you can start
+the container with root.
+```sh
+$ docker run -d -u root abiosoft/caddy
 ```
