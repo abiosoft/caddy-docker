@@ -107,12 +107,7 @@ Let's Encrypt has [rate limit](https://community.letsencrypt.org/t/rate-limits-f
 ```sh
 $ docker run -d \
     -v $(pwd)/Caddyfile:/etc/Caddyfile \
-    -v $HOME/.caddy:/home/caddy/.caddy \
+    -v $HOME/.caddy:/root/.caddy \
     -p 80:80 -p 443:443 \
     abiosoft/caddy
-```
-##### Note
-Following [best practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#/user), a non-privileged user `caddy` is used in the container. However, if you run into permission issues with mounted volumes, you can start the container with root.
-```sh
-$ docker run -d -u root abiosoft/caddy
 ```
