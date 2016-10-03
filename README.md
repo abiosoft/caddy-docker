@@ -12,6 +12,24 @@ $ docker run -d -p 2015:2015 abiosoft/caddy
 
 Point your browser to `http://127.0.0.1:2015`.
 
+> Be aware! If you don't bind mount the location certificates are saved to, you may bypass Lets Encrypt limits
+> rending further certificate generation disallowed! See "Saving Certificates" below!
+
+### Saving Certificates
+
+Save certificates on host machine to prevent regeneration every time container starts.
+Let's Encrypt has [rate limit](https://community.letsencrypt.org/t/rate-limits-for-lets-encrypt/6769).
+```sh
+$ docker run -d \
+    -v $(pwd)/Caddyfile:/etc/Caddyfile \
+    -v $HOME/.caddy:/root/.caddy \
+    -p 80:80 -p 443:443 \
+    abiosoft/caddy
+```
+
+
+Here, `/root/.caddy` is the location *inside* the container where caddy will save certificates.
+
 ### PHP
 `:[<version>-]php` variant of this image bundles PHP-FPM alongside essential php extensions and [composer](https://getcomposer.org). e.g. `:php`, `:0.8.0-php`
 ```sh
@@ -98,16 +116,6 @@ You can change the the ports if ports 80 and 443 are not available on host. e.g.
 ```sh
 $ docker run -d \
     -v $(pwd)/Caddyfile:/etc/Caddyfile \
-    -p 80:80 -p 443:443 \
-    abiosoft/caddy
-```
-
-**Optional** but advised. Save certificates on host machine to prevent regeneration every time container starts.
-Let's Encrypt has [rate limit](https://community.letsencrypt.org/t/rate-limits-for-lets-encrypt/6769).
-```sh
-$ docker run -d \
-    -v $(pwd)/Caddyfile:/etc/Caddyfile \
-    -v $HOME/.caddy:/root/.caddy \
     -p 80:80 -p 443:443 \
     abiosoft/caddy
 ```
