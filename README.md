@@ -12,8 +12,8 @@ $ docker run -d -p 2015:2015 abiosoft/caddy
 
 Point your browser to `http://127.0.0.1:2015`.
 
-> Be aware! If you don't bind mount the location certificates are saved to, you may bypass Lets Encrypt limits
-> rending further certificate generation disallowed! See "Saving Certificates" below!
+> Be aware! If you don't bind mount the location certificates are saved to, you may hit Let's Encrypt rate [limits](https://letsencrypt.org/docs/rate-limits/)
+> rending further certificate generation or renewal disallowed (for a fixed period)! See "Saving Certificates" below!
 
 ### Saving Certificates
 
