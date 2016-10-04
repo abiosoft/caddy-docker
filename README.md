@@ -30,6 +30,20 @@ $ docker run -d \
 
 Here, `/root/.caddy` is the location *inside* the container where caddy will save certificates.
 
+Additionally, you can use an *environment variable* to define the exact location caddy should save generated certificates:
+
+```sh
+$ docker run -d \
+    -e "CADDYPATH=/etc/caddycerts" \
+    -v $HOME/.caddy:/etc/caddycerts \
+    -p 80:80 -p 443:443 \
+    abiosoft/caddy
+```
+
+Above, we utilize the `CADDYPATH` environment variable to define a different location inside the container for
+certificates to be stored. This is probably the safest option as it ensures any future docker image changes don't
+interfere with your ability to save certificates!
+
 ### PHP
 `:[<version>-]php` variant of this image bundles PHP-FPM alongside essential php extensions and [composer](https://getcomposer.org). e.g. `:php`, `:0.8.0-php`
 ```sh
