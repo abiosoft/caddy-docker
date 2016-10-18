@@ -34,4 +34,4 @@ COPY Caddyfile /etc/Caddyfile
 COPY index.php /srv/index.php
 
 ENTRYPOINT ["/usr/bin/caddy"]
-CMD ["--conf", "/etc/Caddyfile"]
+CMD ["--conf", "/etc/Caddyfile", "--log", "stdout"]
