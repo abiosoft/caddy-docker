@@ -3,7 +3,7 @@ MAINTAINER Abiola Ibrahim <abiola89@gmail.com>
 
 LABEL caddy_version="0.9.3" architecture="amd64"
 
-ARG plugins=git
+ARG plugins=multipass
 
 RUN apk add --no-cache openssh-client git tar curl
 
