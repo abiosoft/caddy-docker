@@ -8,7 +8,7 @@ ARG plugins=git
 RUN apk add --no-cache openssh-client git tar php5-fpm curl
 
 # essential php libs
-RUN apk add --no-cache php5-curl php5-gd php5-ctype php5-zip php5-xml php5-iconv php5-sqlite3 php5-mysql php5-mysqli php5-pgsql php5-json php5-phar php5-openssl php5-pdo
+RUN apk add --no-cache php5-curl php5-dom php5-gd php5-ctype php5-zip php5-xml php5-iconv php5-sqlite3 php5-mysql php5-mysqli php5-pgsql php5-json php5-phar php5-openssl php5-pdo
 
 # composer
 RUN curl --silent --show-error --fail --location \
