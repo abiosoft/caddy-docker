@@ -40,8 +40,7 @@ $ docker run -d \
 ```
 
 Above, we utilize the `CADDYPATH` environment variable to define a different location inside the container for
-certificates to be stored. This is probably the safest option as it ensures any future docker image changes don't
-interfere with your ability to save certificates!
+certificates to be stored. This is probably the safest option as it ensures any future docker image changes don't interfere with your ability to save certificates!
 
 ### PHP
 `:[<version>-]php` variant of this image bundles PHP-FPM alongside essential php extensions and [composer](https://getcomposer.org). e.g. `:php`, `:0.8.0-php`
@@ -59,7 +58,7 @@ $ docker run -d -v /path/to/php/src:/srv -p 2015:2015 abiosoft/caddy:php
 Point your browser to `http://127.0.0.1:2015`.
 
 ##### Note
-Your `Caddyfile` must include the line `startup php-fpm`. For Caddy to be PID 1 in the container, php-fpm could not be started.
+Your `Caddyfile` must include the line `startup php-fpm7`. For Caddy to be PID 1 in the container, php-fpm7 could not be started.
 
 ### Using git sources
 
@@ -90,7 +89,7 @@ The image contains a default Caddyfile.
 0.0.0.0
 browse
 fastcgi / 127.0.0.1:9000 php # php variant only
-startup php-fpm # php variant only
+startup php-fpm7 # php variant only
 ```
 The last 2 lines are only present in the php variant.
 
