@@ -5,9 +5,10 @@ LABEL caddy_version="0.9.5" architecture="amd64"
 
 ARG plugins=git
 
-RUN apk add --no-cache openssh-client git tar curl
+RUN apk add --no-cache openssh-client git tar curl ca-certificates
 
-RUN curl --silent --show-error --fail --location \
+RUN update-ca-certificates \
+ && curl --silent --show-error --fail --location \
       --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
       "https://caddyserver.com/download/build?os=linux&arch=amd64&features=${plugins}" \
     | tar --no-same-owner -C /usr/bin/ -xz caddy \
