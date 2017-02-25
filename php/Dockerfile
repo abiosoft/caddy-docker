@@ -8,13 +8,16 @@ ARG plugins=git
 RUN apk add --no-cache openssh-client git tar php7-fpm curl
 
 # essential php libs
-RUN apk add --no-cache php7-curl php7-dom php7-gd php7-ctype php7-zip php7-xml php7-iconv php7-sqlite3 php7-mysqli php7-pgsql php7-json php7-phar php7-openssl php7-pdo
+RUN apk add --no-cache php7-curl php7-dom php7-gd php7-ctype php7-zip php7-xml php7-iconv php7-sqlite3 php7-mysqli php7-pgsql php7-json php7-phar php7-openssl php7-pdo php7-session
+
+# symblink php7 to php
+RUN ln -sf /usr/bin/php7 /usr/bin/php
 
 # composer
 RUN curl --silent --show-error --fail --location \
       --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" \
       "https://getcomposer.org/installer" \
-    | php7 -- --install-dir=/usr/bin --filename=composer
+    | php -- --install-dir=/usr/bin --filename=composer
 
 # allow environment variable access.
 RUN echo "clear_env = no" >> /etc/php7/php-fpm.conf
