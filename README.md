@@ -1,6 +1,6 @@
 # caddy
 
-A [Docker](http://docker.com) image for [Caddy](http://caddyserver.com). This image includes the [git](http://caddyserver.com/docs/git) plugin.  Plugins can be configured via the `plugins` build arg.
+A [Docker](https://docker.com) image for [Caddy](https://caddyserver.com). This image includes the [git](https://caddyserver.com/docs/http.git) plugin.  Plugins can be configured via the `plugins` build arg.
 
 [![](https://images.microbadger.com/badges/image/abiosoft/caddy.svg)](https://microbadger.com/images/abiosoft/caddy "Get your own image badge on microbadger.com")
 
@@ -62,7 +62,7 @@ Your `Caddyfile` must include the line `startup php-fpm7`. For Caddy to be PID 1
 
 ### Using git sources
 
-Caddy can serve sites from git repository using [git](https://caddyserver.com/docs/git) plugin.
+Caddy can serve sites from git repository using [git](https://caddyserver.com/docs/http.git) plugin.
 
 ##### Create Caddyfile
 
