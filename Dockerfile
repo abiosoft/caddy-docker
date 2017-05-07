@@ -1,5 +1,5 @@
 FROM alpine:3.5
-MAINTAINER Abiola Ibrahim <abiola89@gmail.com>
+LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
 LABEL caddy_version="0.10.2" architecture="amd64"
 
