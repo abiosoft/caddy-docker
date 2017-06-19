@@ -1,4 +1,4 @@
-# Dockerfile-plugin will become this when multistage build
+# Dockerfile-plugin will be based on this when multistage build
 # is released for Docker Hub
 
 # builder
