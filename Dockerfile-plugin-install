@@ -1,0 +1,26 @@
+# Installer
+# Usage: docker run -v $GOPATH/bin:/install abiosoft/caddy:plugin-install
+# builder
+FROM golang:1.8.3-alpine as builder
+RUN apk add --no-cache git openssh-client build-base
+RUN go get -d -v github.com/mholt/caddy
+RUN sed -i '/This is where other plugins get plugged in (imported)/a _ "github.com/abiosoft/caddyplug"' \
+  /go/src/github.com/mholt/caddy/caddy/caddymain/run.go
+RUN go get -v github.com/mholt/caddy/caddy
+RUN go get -v github.com/abiosoft/caddyplug/caddyplug
+
+# image
+FROM alpine:3.5
+
+COPY --from=builder /go/bin/caddy /usr/bin/caddy
+RUN chmod 0755 /usr/bin/caddy \
+ && /usr/bin/caddy -version
+
+COPY --from=builder /go/bin/caddyplug /usr/bin/caddyplug
+RUN chmod 0755 /usr/bin/caddyplug \
+ && /usr/bin/caddyplug
+
+VOLUME /install
+
+ENTRYPOINT ["sh"]
+CMD ["-c", "mv /usr/bin/caddy* /install"]

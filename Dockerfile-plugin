@@ -1,0 +1,29 @@
+FROM golang:1.8.3-alpine
+LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
+
+LABEL caddy_version="0.10.3" architecture="amd64"
+
+RUN apk add --no-cache git build-base
+
+# install caddy with pluginloader
+RUN go get -d -v github.com/mholt/caddy
+RUN sed -i '/This is where other plugins get plugged in (imported)/a _ "github.com/abiosoft/caddyplug"' \
+  /go/src/github.com/mholt/caddy/caddy/caddymain/run.go
+RUN go get -v github.com/mholt/caddy/caddy \
+ && mv /go/bin/caddy /usr/bin/caddy \
+ && /usr/bin/caddy -version
+
+# install caddyplug
+RUN go get -v github.com/abiosoft/caddyplug/caddyplug \
+ && mv /go/bin/caddyplug /usr/bin/caddyplug \
+ && /usr/bin/caddyplug list
+
+EXPOSE 80 443 2015
+VOLUME /root/.caddy
+WORKDIR /srv
+
+COPY Caddyfile /etc/Caddyfile
+COPY index.html /srv/index.html
+
+ENTRYPOINT ["/usr/bin/caddy"]
+CMD ["--conf", "/etc/Caddyfile", "--log", "stdout"]
