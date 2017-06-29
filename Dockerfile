@@ -1,7 +1,7 @@
 FROM alpine:3.5
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
-LABEL caddy_version="0.10.3" architecture="amd64"
+LABEL caddy_version="0.10.4" architecture="amd64"
 
 ARG plugins=http.git
 
