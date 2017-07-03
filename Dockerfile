@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.6
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
 LABEL caddy_version="0.10.4" architecture="amd64"
