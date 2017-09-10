@@ -15,7 +15,7 @@ RUN curl --silent --show-error --fail --location \
  && /usr/bin/caddy -version
 
 EXPOSE 80 443 2015
-VOLUME /root/.caddy
+VOLUME /root/.caddy /srv
 WORKDIR /srv
 
 COPY Caddyfile /etc/Caddyfile
