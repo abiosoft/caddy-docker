@@ -1,18 +1,49 @@
+#
+# Builder
+#
+FROM golang:1.8.3-alpine as builder
+
+ARG version="0.10.9"
+
+RUN apk add --no-cache curl git
+
+# caddy
+RUN git clone https://github.com/mholt/caddy -b "v${version}" /go/src/github.com/mholt/caddy \
+    && cd /go/src/github.com/mholt/caddy \
+    && git checkout -b "v${version}"
+
+# git plugin
+RUN git clone https://github.com/abiosoft/caddy-git /go/src/github.com/abiosoft/caddy-git
+
+# integrate git plugin
+RUN printf 'package caddyhttp\nimport _ "github.com/abiosoft/caddy-git"' > \
+    /go/src/github.com/mholt/caddy/caddyhttp/git.go
+
+# builder dependency
+RUN git clone https://github.com/caddyserver/builds /go/src/github.com/caddyserver/builds
+
+# build
+RUN cd /go/src/github.com/mholt/caddy/caddy \
+    && git checkout -f \
+    && go run build.go \
+    && mv caddy /go/bin
+
+#
+# Final stage
+#
 FROM alpine:3.6
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
-LABEL caddy_version="0.10.9" architecture="amd64"
+LABEL caddy_version="0.10.9"
 
-ARG plugins=http.git
+RUN apk add --no-cache openssh-client
 
-RUN apk add --no-cache openssh-client git tar curl
+# install caddy
+COPY --from=builder /go/bin/caddy /usr/bin/caddy
 
-RUN curl --silent --show-error --fail --location \
-      --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
-      "https://caddyserver.com/download/linux/amd64?plugins=${plugins}&license=personal" \
-    | tar --no-same-owner -C /usr/bin/ -xz caddy \
- && chmod 0755 /usr/bin/caddy \
- && /usr/bin/caddy -version
+# validate install
+RUN /usr/bin/caddy -version
+RUN /usr/bin/caddy -plugins | grep http.git
 
 EXPOSE 80 443 2015
 VOLUME /root/.caddy /srv
