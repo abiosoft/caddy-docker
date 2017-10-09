@@ -91,7 +91,7 @@ You can build a docker image with custom plugins by specifying `plugins` build a
 ```
 docker build --build-arg \
     plugins=filemanager,git,linode \
-    github.com/abiosoft/caddy-git.git
+    github.com/abiosoft/caddy-docker.git
 ```
 
 ## Usage
