@@ -1,9 +1,9 @@
 # caddy
 
-A [Docker](https://docker.com) image for [Caddy](https://caddyserver.com). This image includes the [git](https://caddyserver.com/docs/http.git) plugin.
+A [Docker](https://docker.com) image for [Caddy](https://caddyserver.com). This image includes the [git](https://caddyserver.com/docs/http.git) plugin. Plugins can be configured via the `plugins` build arg.
 
 [![](https://images.microbadger.com/badges/image/abiosoft/caddy.svg)](https://microbadger.com/images/abiosoft/caddy "Get your own image badge on microbadger.com")
-[![](https://img.shields.io/badge/version-0.10.9-blue.svg)](https://github.com/mholt/caddy/tree/v0.10.9)
+[![](https://img.shields.io/badge/version-0.10.10-blue.svg)](https://github.com/mholt/caddy/tree/v0.10.10)
 
 ### License
 
@@ -49,7 +49,7 @@ Above, we utilize the `CADDYPATH` environment variable to define a different loc
 certificates to be stored. This is probably the safest option as it ensures any future docker image changes don't interfere with your ability to save certificates!
 
 ### PHP
-`:[<version>-]php` variant of this image bundles PHP-FPM alongside essential php extensions and [composer](https://getcomposer.org). e.g. `:php`, `:0.10.9-php`
+`:[<version>-]php` variant of this image bundles PHP-FPM alongside essential php extensions and [composer](https://getcomposer.org). e.g. `:php`, `:0.10.10-php`
 ```sh
 $ docker run -d -p 2015:2015 abiosoft/caddy:php
 ```
@@ -64,7 +64,7 @@ $ docker run -d -v /path/to/php/src:/srv -p 2015:2015 abiosoft/caddy:php
 Point your browser to `http://127.0.0.1:2015`.
 
 ##### Note
-Your `Caddyfile` must include the line `startup php-fpm7`. For Caddy to be PID 1 in the container, php-fpm7 could not be started.
+Your `Caddyfile` must include the line `on startup php-fpm7`. For Caddy to be PID 1 in the container, php-fpm7 could not be started.
 
 ### Using git sources
 
@@ -85,6 +85,15 @@ $ docker run -d -v $(pwd)/Caddyfile:/etc/Caddyfile -p 2015:2015 abiosoft/caddy
 ```
 Point your browser to `http://127.0.0.1:2015`.
 
+## Custom plugins
+
+You can build a docker image with custom plugins by specifying `plugins` build arg as shown in the example below.
+```
+docker build -build-arg \
+    plugins=filemanager,git,linode \
+    github.com/abiosoft/caddy-git.git
+```
+
 ## Usage
 
 #### Default Caddyfile
@@ -95,7 +104,7 @@ The image contains a default Caddyfile.
 0.0.0.0
 browse
 fastcgi / 127.0.0.1:9000 php # php variant only
-startup php-fpm7 # php variant only
+on startup php-fpm7 # php variant only
 ```
 The last 2 lines are only present in the php variant.
 
