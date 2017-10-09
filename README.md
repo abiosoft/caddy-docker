@@ -89,7 +89,7 @@ Point your browser to `http://127.0.0.1:2015`.
 
 You can build a docker image with custom plugins by specifying `plugins` build arg as shown in the example below.
 ```
-docker build -build-arg \
+docker build --build-arg \
     plugins=filemanager,git,linode \
     github.com/abiosoft/caddy-git.git
 ```
