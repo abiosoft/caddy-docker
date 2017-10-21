@@ -25,5 +25,6 @@ git clone https://github.com/caddyserver/builds /go/src/github.com/caddyserver/b
 cd /go/src/github.com/mholt/caddy/caddy \
     && git checkout -f \
     && GOOS=linux GOARCH=amd64 go run build.go -goos=$GOOS -goarch=$GOARCH -goarm=$GOARM \
+    && mkdir -p /install \
     && mv caddy /install
 
