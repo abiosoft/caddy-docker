@@ -6,7 +6,7 @@ A [Docker](https://docker.com) image for [Caddy](https://caddyserver.com). This 
 [![](https://images.microbadger.com/badges/image/abiosoft/caddy.svg)](https://microbadger.com/images/abiosoft/caddy "Get your own image badge on microbadger.com")
 [![](https://img.shields.io/badge/version-0.10.10-blue.svg)](https://github.com/mholt/caddy/tree/v0.10.10)
 
-Check [abiosoft/caddy:builder](https://github.com/abiosoft/caddy-docker/blob/master/builder/README.md) for generating cross-platform Caddy binaries.
+Check [abiosoft/caddy:builder](https://github.com/abiosoft/caddy-docker/blob/master/BUILDER.md) for generating cross-platform Caddy binaries.
 
 ### License
 
