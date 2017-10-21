@@ -37,7 +37,7 @@ RUN curl --silent --show-error --fail --location \
 RUN echo "clear_env = no" >> /etc/php7/php-fpm.conf
 
 # install caddy
-COPY --from=builder /go/bin/caddy /usr/bin/caddy
+COPY --from=builder /install/caddy /usr/bin/caddy
 
 # validate install
 RUN /usr/bin/caddy -version
