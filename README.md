@@ -15,8 +15,6 @@ This image is built from [source code](https://github.com/mholt/caddy). As such,
 
 ## Getting Started
 
-Check [abiosoft/caddy:builder](https://github.com/abiosoft/caddy-docker/blob/master/builder/README.md) for generating cross-platform Caddy binaries.
-
 ```sh
 $ docker run -d -p 2015:2015 abiosoft/caddy
 ```
