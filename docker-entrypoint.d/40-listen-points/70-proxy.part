@@ -1,0 +1,25 @@
+inneroffset=0
+while true; do
+  PROXY_BASEVAR="${BASEVAR}_PROXY${inneroffset}"
+  PROXY_PATH="${PROXY_BASEVAR}_PATH"
+  PROXY_DEST="${PROXY_BASEVAR}_DEST"
+  if [ -z "${!PROXY_PATH}" ] || [ -z "${!PROXY_DEST}" ]; then
+    break
+  fi
+  echo "  proxy ${!PROXY_PATH} ${!PROXY_DEST} {"
+  WITHOUT="${PROXY_BASEVAR}_WITHOUT"
+  if [ ! -z "${!WITHOUT}" ]; then
+    echo "    without ${!WITHOUT}"
+  fi
+  WEBSOCKET="${PROXY_BASEVAR}_WEBSOCKET"
+  if [ ! -z "${!WEBSOCKET}" ]; then
+    echo "    websocket"
+  fi
+  TRANSPARENT="${PROXY_BASEVAR}_TRANSPARENT"
+  if [ ! -z "${!TRANSPARENT}" ]; then
+    echo "    transparent"
+  fi
+  echo "  }"
+  inneroffset=$((inneroffset + 1))
+done
+

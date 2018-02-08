@@ -1,0 +1,11 @@
+inneroffset=0
+while true; do
+  USERNAME="${BASEVAR}_AUTH${inneroffset}_USERNAME"
+  HTTP_PATH="${BASEVAR}_AUTH${inneroffset}_PATH"
+  PASSWORD="${BASEVAR}_AUTH${inneroffset}_PASSWORD"
+  if [ -z "${!USERNAME}" ] || [ -z "${!HTTP_PATH}" ] || [ -z "${!PASSWORD}" ]; then
+    break
+  fi
+  echo "  basicauth ${!HTTP_PATH} ${!USERNAME} ${!PASSWORD}"
+  inneroffset=$((inneroffset + 1))
+done

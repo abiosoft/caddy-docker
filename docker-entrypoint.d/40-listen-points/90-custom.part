@@ -1,0 +1,9 @@
+inneroffset=0
+while true; do
+  CUSTOM="${BASEVAR}_CUSTOM${inneroffset}"
+  if [ -z "${!CUSTOM}" ]; then
+    break
+  fi
+  echo "  ${!CUSTOM}"
+  inneroffset=$((inneroffset + 1))
+done

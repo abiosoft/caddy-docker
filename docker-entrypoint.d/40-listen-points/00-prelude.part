@@ -1,0 +1,2 @@
+echo "  log stdout"
+echo "  errors stderr"

@@ -1,0 +1,22 @@
+FILTER_MAXBUFFER_SIZE="${BASEVAR}_FILTER_MAXBUFFER_SIZE"
+if [ ! -z "${!FILTER_MAXBUFFER_SIZE}" ]; then
+  echo "  filter max_buffer_size ${!FILTER_MAXBUFFER_SIZE}"
+fi
+
+inneroffset=0
+while true; do
+  FILTER_PATH="${BASEVAR}_FILTER${inneroffset}_PATH"
+  FILTER_CONTENT_TYPE="${BASEVAR}_FILTER${inneroffset}_CONTENT_TYPE"
+  FILTER_SEARCH_PATTERN="${BASEVAR}_FILTER${inneroffset}_SEARCH_PATTERN"
+  FILTER_REPLACEMENT="${BASEVAR}_FILTER${inneroffset}_REPLACEMENT"
+  if [ -z "${!FILTER_PATH}" ] || [ -z "${!FILTER_CONTENT_TYPE}" ] || [ -z "${!FILTER_SEARCH_PATTERN}" ] || [ -z "${!FILTER_REPLACEMENT}" ]; then
+    break
+  fi
+  echo "  filter rule {"
+  echo "    path ${!FILTER_PATH}"
+  echo "    content_type ${!FILTER_CONTENT_TYPE}"
+  echo "    search_pattern ${!FILTER_SEARCH_PATTERN}"
+  echo "    replacement ${!FILTER_REPLACEMENT}"
+  echo "  }"
+  inneroffset=$((inneroffset + 1))
+done
