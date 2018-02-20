@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=${VERSION:-"0.10.10"}
+VERSION=${VERSION:-"0.10.11"}
 
 # caddy
 git clone https://github.com/mholt/caddy -b "v$VERSION" /go/src/github.com/mholt/caddy \
