@@ -19,6 +19,6 @@ docker run -v $(pwd):/install -e PLUGINS=git,filemanager abiosoft/caddy:builder
 ### Environment Variables
 
 * `PLUGINS` - comma separated Caddy plugins. e.g. `-e PLUGINS=git,filemanager,linode`
-* `VERSION` - Caddy version. Default `0.10.10`
+* `VERSION` - Caddy version. Default `0.10.11`
 * `GOOS`, `GOARCH` and `GOARM` are all supported. Default `GOOS=linux`, `GOARCH=amd64`
 

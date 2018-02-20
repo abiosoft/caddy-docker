@@ -3,7 +3,7 @@
 #
 FROM abiosoft/caddy:builder as builder
 
-ARG version="0.10.10"
+ARG version="0.10.11"
 ARG plugins="git"
 
 RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
@@ -14,7 +14,7 @@ RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
 FROM alpine:3.6
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
-LABEL caddy_version="0.10.10"
+LABEL caddy_version="0.10.11"
 
 RUN apk add --no-cache openssh-client git tar php7-fpm curl
 
