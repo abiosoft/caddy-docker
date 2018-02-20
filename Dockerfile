@@ -11,7 +11,7 @@ RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
 #
 # Final stage
 #
-FROM alpine:3.6
+FROM alpine:3.7
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
 LABEL caddy_version="0.10.11"
