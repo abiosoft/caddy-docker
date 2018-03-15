@@ -16,7 +16,8 @@ LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
 LABEL caddy_version="0.10.11"
 
-RUN apk add --no-cache openssh-client git
+# install dependencies for caddy
+RUN apk add --no-cache ca-certificates
 
 # install caddy
 COPY --from=builder /install/caddy /usr/bin/caddy
@@ -24,6 +25,10 @@ COPY --from=builder /install/caddy /usr/bin/caddy
 # validate install
 RUN /usr/bin/caddy -version
 RUN /usr/bin/caddy -plugins
+
+# install dependencies for http.git
+RUN [ $(caddy -plugins | grep http.git) ] && \
+    apk add --no-cache openssh-client git || true
 
 EXPOSE 80 443 2015
 VOLUME /root/.caddy /srv
