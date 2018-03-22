@@ -14,7 +14,8 @@ RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
 FROM alpine:3.7
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
-LABEL caddy_version="0.10.11"
+ARG version="0.10.11"
+LABEL caddy_version="$version"
 
 RUN apk add --no-cache openssh-client git tar php7-fpm curl
 
