@@ -4,7 +4,7 @@ A [Docker](https://docker.com) image for [Caddy](https://caddyserver.com). This 
 
 
 [![](https://images.microbadger.com/badges/image/abiosoft/caddy.svg)](https://microbadger.com/images/abiosoft/caddy "Get your own image badge on microbadger.com")
-[![](https://img.shields.io/badge/version-0.10.11-blue.svg)](https://github.com/mholt/caddy/tree/v0.10.11)
+[![](https://img.shields.io/badge/version-0.10.12-blue.svg)](https://github.com/mholt/caddy/tree/v0.10.12)
 
 Check [abiosoft/caddy:builder](https://github.com/abiosoft/caddy-docker/blob/master/BUILDER.md) for generating cross-platform Caddy binaries.
 
@@ -12,6 +12,8 @@ Check [abiosoft/caddy:builder](https://github.com/abiosoft/caddy-docker/blob/mas
 
 This image is built from [source code](https://github.com/mholt/caddy). As such, it is subject to the project's [Apache 2.0 license](https://github.com/mholt/caddy/blob/baf6db5b570e36ea2fee30d50f879255a5895370/LICENSE.txt), but it neither contains nor is subject to [the EULA for Caddy's official binary distributions](https://github.com/mholt/caddy/blob/545fa844bbd188c1e5bff6926e5c410e695571a0/dist/EULA.txt).
 
+### Let's Encrypt Subscriber Agreement
+Caddy may prompt to agree to [Let's Encrypt Subscriber Agreement](https://letsencrypt.org/documents/2017.11.15-LE-SA-v1.2.pdf). This is configurable with `ACME_AGREE` environment variable. Set it to true to agree. `ACME_AGREE=true`.
 
 ## Getting Started
 

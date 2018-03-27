@@ -6,6 +6,9 @@ FROM abiosoft/caddy:builder as builder
 ARG version="0.10.12"
 ARG plugins="git"
 
+# process wrapper
+RUN go get -v github.com/abiosoft/parent
+
 RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
 
 #
@@ -16,6 +19,9 @@ LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
 ARG version="0.10.11"
 LABEL caddy_version="$version"
+
+# Let's Encrypt Agreement
+ENV ACME_AGREE="false"
 
 RUN apk add --no-cache openssh-client git tar php7-fpm curl
 
@@ -52,5 +58,9 @@ WORKDIR /srv
 COPY Caddyfile /etc/Caddyfile
 COPY index.php /srv/index.php
 
-ENTRYPOINT ["/usr/bin/caddy"]
-CMD ["--conf", "/etc/Caddyfile", "--log", "stdout"]
+# install process wrapper
+COPY --from=builder /go/bin/parent /bin/parent
+
+ENTRYPOINT ["/bin/parent", "caddy"]
+CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=$ACME_AGREE"]
+
