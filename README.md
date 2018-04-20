@@ -4,7 +4,7 @@ A [Docker](https://docker.com) image for [Caddy](https://caddyserver.com). This 
 
 
 [![](https://images.microbadger.com/badges/image/abiosoft/caddy.svg)](https://microbadger.com/images/abiosoft/caddy "Get your own image badge on microbadger.com")
-[![](https://img.shields.io/badge/version-0.10.13-blue.svg)](https://github.com/mholt/caddy/tree/v0.10.13)
+[![](https://img.shields.io/badge/version-0.10.14-blue.svg)](https://github.com/mholt/caddy/tree/v0.10.14)
 
 Check [abiosoft/caddy:builder](https://github.com/abiosoft/caddy-docker/blob/master/BUILDER.md) for generating cross-platform Caddy binaries.
 
@@ -54,7 +54,7 @@ Above, we utilize the `CADDYPATH` environment variable to define a different loc
 certificates to be stored. This is probably the safest option as it ensures any future docker image changes don't interfere with your ability to save certificates!
 
 ### PHP
-`:[<version>-]php` variant of this image bundles PHP-FPM alongside essential php extensions and [composer](https://getcomposer.org). e.g. `:php`, `:0.10.13-php`
+`:[<version>-]php` variant of this image bundles PHP-FPM alongside essential php extensions and [composer](https://getcomposer.org). e.g. `:php`, `:0.10.14-php`
 ```sh
 $ docker run -d -p 2015:2015 abiosoft/caddy:php
 ```
