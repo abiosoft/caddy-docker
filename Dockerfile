@@ -3,7 +3,7 @@
 #
 FROM abiosoft/caddy:builder as builder
 
-ARG version="0.10.13"
+ARG version="0.10.14"
 ARG plugins="git"
 
 # process wrapper
@@ -17,7 +17,7 @@ RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
 FROM alpine:3.7
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
-ARG version="0.10.13"
+ARG version="0.10.14"
 LABEL caddy_version="$version"
 
 # Let's Encrypt Agreement
