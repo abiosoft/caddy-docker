@@ -55,8 +55,8 @@ EXPOSE 80 443 2015
 VOLUME /root/.caddy /srv
 WORKDIR /srv
 
-#COPY Caddyfile /etc/Caddyfile
-#COPY index.php /srv/index.php
+COPY Caddyfile /etc/Caddyfile
+COPY index.php /srv/index.php
 
 # install process wrapper
 COPY --from=builder /go/bin/parent /bin/parent
