@@ -4,7 +4,7 @@
 FROM abiosoft/caddy:builder as builder
 
 ARG version="0.10.14"
-ARG plugins="git"
+ARG plugins="git,reauth"
 
 # process wrapper
 RUN go get -v github.com/abiosoft/parent
@@ -55,8 +55,8 @@ EXPOSE 80 443 2015
 VOLUME /root/.caddy /srv
 WORKDIR /srv
 
-COPY Caddyfile /etc/Caddyfile
-COPY index.php /srv/index.php
+#COPY Caddyfile /etc/Caddyfile
+#COPY index.php /srv/index.php
 
 # install process wrapper
 COPY --from=builder /go/bin/parent /bin/parent
