@@ -4,7 +4,7 @@ A [Docker](https://docker.com) image for [Caddy](https://caddyserver.com). This 
 
 
 [![](https://images.microbadger.com/badges/image/abiosoft/caddy.svg)](https://microbadger.com/images/abiosoft/caddy "Get your own image badge on microbadger.com")
-[![](https://img.shields.io/badge/version-0.10.14-blue.svg)](https://github.com/mholt/caddy/tree/v0.10.14)
+[![](https://img.shields.io/badge/version-0.11.0-blue.svg)](https://github.com/mholt/caddy/tree/v0.11.0)
 
 Check [abiosoft/caddy:builder](https://github.com/abiosoft/caddy-docker/blob/master/BUILDER.md) for generating cross-platform Caddy binaries.
 
@@ -14,6 +14,11 @@ This image is built from [source code](https://github.com/mholt/caddy). As such,
 
 ### Let's Encrypt Subscriber Agreement
 Caddy may prompt to agree to [Let's Encrypt Subscriber Agreement](https://letsencrypt.org/documents/2017.11.15-LE-SA-v1.2.pdf). This is configurable with `ACME_AGREE` environment variable. Set it to true to agree. `ACME_AGREE=true`.
+
+### Telemetry Stats
+[Telemetry stats](https://caddyserver.com/docs/telemetry) are submitted to Caddy by default. This is configurable with `ENABLE_TELEMETRY` environment variable. You can opt out by setting the variable to `false`.
+
+Note that Caddy's source is slightly modified to make this a runtime configuration for convenience and will thereby reflect in `caddy -version`.
 
 ## Getting Started
 

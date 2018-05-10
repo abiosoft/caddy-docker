@@ -22,7 +22,7 @@ if [ "$line" ] && [ $TELEMETRY = "false" ]; then
     import "os"
     var enableTelemetry = $TELEMETRY
     func init() {
-        switch os.Getenv("ENABLE_TELEMETARY") {
+        switch os.Getenv("ENABLE_TELEMETRY") {
         case "0", "false":
             enableTelemetry = false
         case "1", "true":
