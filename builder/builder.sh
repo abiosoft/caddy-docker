@@ -15,10 +15,21 @@ alias caddyplug='GOOS=linux GOARCH=amd64 caddyplug'
 # telemetry
 run_file="/go/src/github.com/mholt/caddy/caddy/caddymain/run.go"
 line=$(awk '/const enableTelemetry = true/{print NR}' $run_file)
-
 if [ "$line" ] && [ $TELEMETRY = "false" ]; then
     sed -i.bak -e "${line}d" $run_file
-    echo "package caddymain; const enableTelemetry = $TELEMETRY" >> "$run_file.disablestats.go"
+    cat > "$run_file.disablestats.go" <<EOF
+    package caddymain
+    import "os"
+    var enableTelemetry = $TELEMETRY
+    func init() {
+        switch os.Getenv("ENABLE_TELEMETARY") {
+        case "0", "false":
+            enableTelemetry = false
+        case "1", "true":
+            enableTelemetry = true
+        }
+    }
+EOF
 fi
 
 # plugins
