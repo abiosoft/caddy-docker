@@ -1,6 +1,7 @@
 #!/bin/sh
 
-VERSION=${VERSION:-"0.10.14"}
+VERSION=${VERSION:-"0.11.0"}
+TELEMETRY=${ENABLE_TELEMETRY:-"true"}
 
 # caddy
 git clone https://github.com/mholt/caddy -b "v$VERSION" /go/src/github.com/mholt/caddy \
@@ -10,6 +11,15 @@ git clone https://github.com/mholt/caddy -b "v$VERSION" /go/src/github.com/mholt
 # plugin helper
 GOOS=linux GOARCH=amd64 go get -v github.com/abiosoft/caddyplug/caddyplug
 alias caddyplug='GOOS=linux GOARCH=amd64 caddyplug'
+
+# telemetry
+run_file="/go/src/github.com/mholt/caddy/caddy/caddymain/run.go"
+line=$(awk '/const enableTelemetry = true/{print NR}' $run_file)
+
+if [ "$line" ] && [ $TELEMETRY = "false" ]; then
+    sed -i.bak -e "${line}d" $run_file
+    echo "package caddymain; const enableTelemetry = $TELEMETRY" >> "$run_file.disablestats.go"
+fi
 
 # plugins
 for plugin in $(echo $PLUGINS | tr "," " "); do \
@@ -23,7 +33,6 @@ git clone https://github.com/caddyserver/builds /go/src/github.com/caddyserver/b
 
 # build
 cd /go/src/github.com/mholt/caddy/caddy \
-    && git checkout -f \
     && GOOS=linux GOARCH=amd64 go run build.go -goos=$GOOS -goarch=$GOARCH -goarm=$GOARM \
     && mkdir -p /install \
     && mv caddy /install
