@@ -18,9 +18,7 @@ This image is built from [source code](https://github.com/mholt/caddy). As such,
 Caddy may prompt to agree to [Let's Encrypt Subscriber Agreement](https://letsencrypt.org/documents/2017.11.15-LE-SA-v1.2.pdf). This is configurable with `ACME_AGREE` environment variable. Set it to true to agree. `ACME_AGREE=true`.
 
 ### Telemetry Stats
-[Telemetry stats](https://caddyserver.com/docs/telemetry) are submitted to Caddy by default. This is configurable with `ENABLE_TELEMETRY` environment variable. You can opt out by setting the variable to `false`.
-
-Note that Caddy's source is slightly modified to make this a runtime configuration for convenience and will thereby reflect in `caddy -version`.
+Starting from `v0.11.0`, [Telemetry stats](https://caddyserver.com/docs/telemetry) are submitted to Caddy by default. To use Caddy without telemetry, use the `:no-stats` or `:<version>-no-stats` tags. e.g. `:0.11.0-no-stats`, `:0.11.0-php-no-stats`.
 
 ## Getting Started
 
