@@ -21,9 +21,9 @@ if [ "$TELEMETRY" = "false" ]; then
     func init() {
         switch os.Getenv("ENABLE_TELEMETRY") {
         case "0", "false":
-            enableTelemetry = false
+            EnableTelemetry = false
         case "1", "true":
-            enableTelemetry = true
+            EnableTelemetry = true
         }
     }
 EOF
