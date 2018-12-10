@@ -3,6 +3,11 @@
 VERSION=${VERSION:-"0.11.0"}
 TELEMETRY=${ENABLE_TELEMETRY:-"true"}
 
+# workaround for https://github.com/abiosoft/caddy-docker/issues/151
+git clone https://github.com/xenolf/lego /go/src/github.com/xenolf/lego \
+    && cd /go/src/github.com/xenolf/lego \
+    && git checkout "4e842a5eb6dcb9520e03db70cd5896f1df14b72a"
+
 # caddy
 git clone https://github.com/mholt/caddy -b "v$VERSION" /go/src/github.com/mholt/caddy \
     && cd /go/src/github.com/mholt/caddy \
