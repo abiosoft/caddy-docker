@@ -20,6 +20,10 @@ LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 ARG version="0.11.1"
 LABEL caddy_version="$version"
 
+# PHP www-user UID and GID
+ARG PUID="1000"
+ARG PGID="1000"
+
 # Let's Encrypt Agreement
 ENV ACME_AGREE="false"
 
@@ -36,6 +40,12 @@ RUN ln -sf /usr/bin/php7 /usr/bin/php
 
 # symlink php-fpm7 to php-fpm
 RUN ln -sf /usr/bin/php-fpm7 /usr/bin/php-fpm
+
+# add a php www-user instead of nobody
+RUN addgroup -g ${PGID} www-user && \
+    adduser -D -H -u ${PUID} -G www-user www-user && \
+    sed -i "s|^user = .*|user = www-user|g" /etc/php7/php-fpm.d/www.conf && \
+    sed -i "s|^group = .*|group = www-user|g" /etc/php7/php-fpm.d/www.conf
 
 # composer
 RUN curl --silent --show-error --fail --location \
