@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=${VERSION:-"0.11.0"}
+VERSION=${VERSION:-"0.11.2"}
 TELEMETRY=${ENABLE_TELEMETRY:-"true"}
 
 # caddy

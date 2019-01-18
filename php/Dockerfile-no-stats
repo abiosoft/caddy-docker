@@ -3,7 +3,7 @@
 #
 FROM abiosoft/caddy:builder as builder
 
-ARG version="0.11.1"
+ARG version="0.11.2"
 ARG plugins="git,cors,realip,expires,cache"
 
 # process wrapper
@@ -17,7 +17,7 @@ RUN VERSION=${version} PLUGINS=${plugins} ENABLE_TELEMETRY=false /bin/sh /usr/bi
 FROM alpine:3.8
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
-ARG version="0.11.1"
+ARG version="0.11.2"
 LABEL caddy_version="$version"
 
 # PHP www-user UID and GID
@@ -43,15 +43,15 @@ RUN ln -sf /usr/bin/php-fpm7 /usr/bin/php-fpm
 
 # add a php www-user instead of nobody
 RUN addgroup -g ${PGID} www-user && \
-    adduser -D -H -u ${PUID} -G www-user www-user && \
-    sed -i "s|^user = .*|user = www-user|g" /etc/php7/php-fpm.d/www.conf && \
-    sed -i "s|^group = .*|group = www-user|g" /etc/php7/php-fpm.d/www.conf
+  adduser -D -H -u ${PUID} -G www-user www-user && \
+  sed -i "s|^user = .*|user = www-user|g" /etc/php7/php-fpm.d/www.conf && \
+  sed -i "s|^group = .*|group = www-user|g" /etc/php7/php-fpm.d/www.conf
 
 # composer
 RUN curl --silent --show-error --fail --location \
-      --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" \
-      "https://getcomposer.org/installer" \
-    | php -- --install-dir=/usr/bin --filename=composer
+  --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" \
+  "https://getcomposer.org/installer" \
+  | php -- --install-dir=/usr/bin --filename=composer
 
 # allow environment variable access.
 RUN echo "clear_env = no" >> /etc/php7/php-fpm.conf
