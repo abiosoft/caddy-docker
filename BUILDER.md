@@ -8,7 +8,7 @@ Docker image for building Caddy binaries.
 Example
 
 ```
-docker run --rm -v $(pwd):/install -e PLUGINS=git,filemanager abiosoft/caddy:builder
+docker run --rm -v $(pwd):/install -e PLUGINS=git,filebrowser abiosoft/caddy:builder
 
 ```
 
@@ -18,7 +18,7 @@ docker run --rm -v $(pwd):/install -e PLUGINS=git,filemanager abiosoft/caddy:bui
 
 ### Environment Variables
 
-* `PLUGINS` - comma separated Caddy plugins. e.g. `-e PLUGINS=git,filemanager,linode`
-* `VERSION` - Caddy version. Default `0.11.0`
+* `PLUGINS` - comma separated Caddy plugins. e.g. `-e PLUGINS=git,filebrowser,linode`
+* `VERSION` - Caddy version. Default `0.11.2`
 * `ENABLE_TELEMETRY` - Enable telemetry stats. Options `true`|`false`. Default `true`
 * `GOOS`, `GOARCH` and `GOARM` are all supported. Default `GOOS=linux`, `GOARCH=amd64`
