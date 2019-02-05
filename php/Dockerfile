@@ -3,7 +3,7 @@
 #
 FROM abiosoft/caddy:builder as builder
 
-ARG version="0.11.2"
+ARG version="0.11.3"
 ARG plugins="git,cors,realip,expires,cache"
 
 # process wrapper
@@ -17,7 +17,7 @@ RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
 FROM alpine:3.8
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
-ARG version="0.11.2"
+ARG version="0.11.3"
 LABEL caddy_version="$version"
 
 # PHP www-user UID and GID
