@@ -9,8 +9,8 @@ git clone https://github.com/mholt/caddy -b "v$VERSION" /go/src/github.com/mholt
     && git checkout -b "v$VERSION"
 
 # plugin helper
-GOOS=linux GOARCH=amd64 go get -v github.com/abiosoft/caddyplug/caddyplug
-alias caddyplug='GOOS=linux GOARCH=amd64 caddyplug'
+GOOS=linux GOARCH=arm GOARM=5 go get -v github.com/abiosoft/caddyplug/caddyplug
+alias caddyplug='GOOS=linux GOARCH=arm GOARM=5 caddyplug'
 
 # telemetry
 run_file="/go/src/github.com/mholt/caddy/caddy/caddymain/run.go"
@@ -41,7 +41,7 @@ git clone https://github.com/caddyserver/builds /go/src/github.com/caddyserver/b
 
 # build
 cd /go/src/github.com/mholt/caddy/caddy \
-    && GOOS=linux GOARCH=amd64 go run build.go -goos=$GOOS -goarch=$GOARCH -goarm=$GOARM \
+    && GOOS=linux GOARCH=arm GOARM=5 go run build.go -goos=$GOOS -goarch=$GOARCH -goarm=$GOARM \
     && mkdir -p /install \
     && mv caddy /install
 
