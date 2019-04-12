@@ -3,10 +3,13 @@
 VERSION=${VERSION:-"0.11.5"}
 TELEMETRY=${ENABLE_TELEMETRY:-"true"}
 
+# add `v` prefix for version numbers
+[ "$(echo $VERSION | cut -c1)" -ge 0 ] 2>/dev/null && VERSION="v$VERSION"
+
 # caddy
-git clone https://github.com/mholt/caddy -b "v$VERSION" /go/src/github.com/mholt/caddy \
+git clone https://github.com/mholt/caddy -b "$VERSION" /go/src/github.com/mholt/caddy \
     && cd /go/src/github.com/mholt/caddy \
-    && git checkout -b "v$VERSION"
+    && git checkout -b "$VERSION"
 
 # plugin helper
 GOOS=linux GOARCH=amd64 go get -v github.com/abiosoft/caddyplug/caddyplug
