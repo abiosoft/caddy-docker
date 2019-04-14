@@ -14,7 +14,7 @@ git clone https://github.com/mholt/caddy -b "$VERSION" /go/src/github.com/mholt/
 
 # plugin helper
 GOOS=linux GOARCH=amd64 go get -v github.com/abiosoft/caddyplug/caddyplug
-alias caddyplug='GOOS=linux GOARCH=amd64 caddyplug'
+alias caddyplug='GO111MODULE=off GOOS=linux GOARCH=amd64 caddyplug'
 
 # check for modules support
 go_mod=false
@@ -39,16 +39,17 @@ fi
 
 # plugins
 for plugin in $(echo $PLUGINS | tr "," " "); do \
-    printf "package caddyhttp\nimport _ \"$(caddyplug package $plugin)\"" > \
+    package=$(caddyplug package $plugin)
+    $go_mod || go get -v "$package" ; # not needed for modules
+    printf "package caddyhttp\nimport _ \"$package\"" > \
         /go/src/github.com/mholt/caddy/caddyhttp/$plugin.go ; \
 done
 
-# builder dependency
+# builder dependency, not needed for modules
 $go_mod || git clone https://github.com/caddyserver/builds /go/src/github.com/caddyserver/builds
 
 # build
 cd /go/src/github.com/mholt/caddy/caddy \
-    && go get -v ./... \
     && GOOS=linux GOARCH=amd64 go run build.go -goos=$GOOS -goarch=$GOARCH -goarm=$GOARM \
     && mkdir -p /install \
     && mv caddy /install
