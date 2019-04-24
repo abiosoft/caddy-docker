@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=${VERSION:-"0.11.5"}
+VERSION=${VERSION:-"1.0.0"}
 TELEMETRY=${ENABLE_TELEMETRY:-"true"}
 
 # add `v` prefix for version numbers
@@ -84,6 +84,8 @@ legacy() {
                 EnableTelemetry = false
             case "1", "true":
                 EnableTelemetry = true
+            default:
+                EnableTelemetry = false
             }
         }
 EOF

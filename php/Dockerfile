@@ -3,8 +3,8 @@
 #
 FROM abiosoft/caddy:builder as builder
 
-ARG version="0.11.5"
-ARG plugins="git,filebrowser,cors,realip,expires,cache"
+ARG version="1.0.0"
+ARG plugins="git,cors,realip,expires,cache"
 
 # process wrapper
 RUN go get -v github.com/abiosoft/parent
@@ -17,7 +17,7 @@ RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
 FROM alpine:3.8
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
-ARG version="0.11.5"
+ARG version="1.0.0"
 LABEL caddy_version="$version"
 
 # PHP www-user UID and GID
@@ -47,6 +47,7 @@ RUN apk add --no-cache \
   php7-pgsql \
   php7-phar \
   php7-session \
+  php7-simplexml \
   php7-sqlite3 \
   php7-tokenizer \
   php7-xml \
