@@ -5,11 +5,12 @@ FROM abiosoft/caddy:builder as builder
 
 ARG version="1.0.0"
 ARG plugins="git,cors,realip,expires,cache"
+ARG enable_telemetry="true"
 
 # process wrapper
 RUN go get -v github.com/abiosoft/parent
 
-RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
+RUN VERSION=${version} PLUGINS=${plugins} ENABLE_TELEMETRY=${enable_telemetry} /bin/sh /usr/bin/builder.sh
 
 #
 # Final stage
@@ -22,6 +23,9 @@ LABEL caddy_version="$version"
 
 # Let's Encrypt Agreement
 ENV ACME_AGREE="false"
+
+# Telemetry Stats
+ENV ENABLE_TELEMETRY="$enable_telemetry"
 
 RUN apk add --no-cache openssh-client git
 
