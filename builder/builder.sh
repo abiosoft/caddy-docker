@@ -22,7 +22,18 @@ end_stage() {
 }
 
 get_package() {
-    GO111MODULE=off GOOS=linux GOARCH=amd64 caddyplug package $1 2> /dev/null
+    # go module require special dns handling
+    if $go_mod && [ -f /dnsproviders/$1/$1.go ]; then
+        mkdir -p /caddy/dnsproviders/$1
+        cp -r /dnsproviders/$1/$1.go /caddy/dnsproviders/$1/$1.go
+        echo "caddy/dnsproviders/$1"
+    else
+        GO111MODULE=off GOOS=linux GOARCH=amd64 caddyplug package $1 2> /dev/null
+    fi
+}
+
+dns_plugins() {
+    git clone https://github.com/caddyserver/dnsproviders /dnsproviders
 }
 
 plugins() {
@@ -96,6 +107,7 @@ EOF
 stage "fetching caddy source"
 git clone https://github.com/mholt/caddy -b "$VERSION" /go/src/github.com/mholt/caddy \
     && cd /go/src/github.com/mholt/caddy
+dns_plugins
 end_stage
 
 # plugin helper
