@@ -1,0 +1,18 @@
+
+---
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: docker
+  image: plugins/docker
+  settings:
+    username: poksiala
+    password:
+      from_secret: docker_password
+    repo: poksiala/caddy
+    tags: latest

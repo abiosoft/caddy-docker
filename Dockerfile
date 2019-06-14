@@ -1,16 +1,18 @@
 #
 # Builder
 #
-FROM abiosoft/caddy:builder as builder
+FROM poksiala/caddy-builder:latest as builder
 
 ARG version="1.0.0"
-ARG plugins="git,cors,realip,expires,cache"
-ARG enable_telemetry="true"
+ARG plugins="cors,realip,expires,cache,prometheus"
+ARG enable_telemetry="false"
+ARG goos="linux"
+ARG goarch=arm64
 
 # process wrapper
 RUN go get -v github.com/abiosoft/parent
 
-RUN VERSION=${version} PLUGINS=${plugins} ENABLE_TELEMETRY=${enable_telemetry} /bin/sh /usr/bin/builder.sh
+RUN VERSION=${version} PLUGINS=${plugins} ENABLE_TELEMETRY=${enable_telemetry} GOOS=${goos} GOARCH=${goarch} /bin/sh /usr/bin/builder.sh
 
 #
 # Final stage
@@ -22,7 +24,7 @@ ARG version="1.0.0"
 LABEL caddy_version="$version"
 
 # Let's Encrypt Agreement
-ENV ACME_AGREE="false"
+ENV ACME_AGREE="true"
 
 # Telemetry Stats
 ENV ENABLE_TELEMETRY="$enable_telemetry"
