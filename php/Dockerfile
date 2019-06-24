@@ -14,7 +14,7 @@ RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
 #
 # Final stage
 #
-FROM alpine
+FROM alpine:3.10
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
 ARG version="1.0.0"
