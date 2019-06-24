@@ -14,7 +14,7 @@ RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
 #
 # Final stage
 #
-FROM alpine:3.8
+FROM alpine:3.10
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
 ARG version="1.0.0"
@@ -41,9 +41,11 @@ RUN apk add --no-cache \
   php7-json \
   php7-mbstring \
   php7-mysqli \
+  php7-opcache \
   php7-openssl \
   php7-pdo \
   php7-pdo_mysql \
+  php7-pdo_sqlite \
   php7-pgsql \
   php7-phar \
   php7-session \
@@ -96,4 +98,3 @@ COPY --from=builder /go/bin/parent /bin/parent
 
 ENTRYPOINT ["/bin/parent", "caddy"]
 CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=$ACME_AGREE"]
-
