@@ -15,7 +15,7 @@ RUN VERSION=${version} PLUGINS=${plugins} ENABLE_TELEMETRY=${enable_telemetry} /
 #
 # Final stage
 #
-FROM alpine:3.8
+FROM alpine
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
 ARG version="1.0.0"
@@ -48,4 +48,3 @@ COPY --from=builder /go/bin/parent /bin/parent
 
 ENTRYPOINT ["/bin/parent", "caddy"]
 CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=$ACME_AGREE"]
-
