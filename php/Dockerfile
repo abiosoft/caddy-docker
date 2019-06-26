@@ -5,14 +5,15 @@ FROM abiosoft/caddy:builder as builder
 
 ARG version="1.0.0"
 ARG plugins="git,cors,realip,expires,cache"
+ARG enable_telemetry="true"
 
-# process wrapper
+# Process Wrapper
 RUN go get -v github.com/abiosoft/parent
 
-RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
+RUN VERSION=${version} PLUGINS=${plugins} ENABLE_TELEMETRY=${enable_telemetry} /bin/sh /usr/bin/builder.sh
 
 #
-# Final stage
+# Final Stage
 #
 FROM alpine:3.10
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
@@ -27,14 +28,26 @@ ARG PGID="1000"
 # Let's Encrypt Agreement
 ENV ACME_AGREE="false"
 
-RUN apk add --no-cache openssh-client git tar php7-fpm curl
+# Telemetry Stats
+ENV ENABLE_TELEMETRY="$enable_telemetry"
 
-# essential php libs
+RUN apk add --no-cache \
+  ca-certificates \
+  curl \
+  git \
+  mailcap \
+  openssh-client \
+  php7-fpm \
+  tar \
+  tzdata
+
+# Essential PHP Extensions
 RUN apk add --no-cache \
   php7-bcmath \
   php7-ctype \
   php7-curl \
   php7-dom \
+  php7-exif \
   php7-fileinfo \
   php7-gd \
   php7-iconv \
@@ -57,34 +70,33 @@ RUN apk add --no-cache \
   php7-xmlwriter \
   php7-zip
 
-# symblink php7 to php
+# Symlink php7 to php
 RUN ln -sf /usr/bin/php7 /usr/bin/php
 
-# symlink php-fpm7 to php-fpm
+# Symlink php-fpm7 to php-fpm
 RUN ln -sf /usr/bin/php-fpm7 /usr/bin/php-fpm
 
-# add a php www-user instead of nobody
+# Add a PHP www-user instead of nobody
 RUN addgroup -g ${PGID} www-user && \
   adduser -D -H -u ${PUID} -G www-user www-user && \
   sed -i "s|^user = .*|user = www-user|g" /etc/php7/php-fpm.d/www.conf && \
   sed -i "s|^group = .*|group = www-user|g" /etc/php7/php-fpm.d/www.conf
 
-# composer
+# Composer
 RUN curl --silent --show-error --fail --location \
   --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" \
   "https://getcomposer.org/installer" \
   | php -- --install-dir=/usr/bin --filename=composer
 
-# allow environment variable access.
+# Allow environment variable access
 RUN echo "clear_env = no" >> /etc/php7/php-fpm.conf
 
-# install caddy
+# Install Caddy
 COPY --from=builder /install/caddy /usr/bin/caddy
 
-# validate install
+# Validate install
 RUN /usr/bin/caddy -version
 RUN /usr/bin/caddy -plugins
-
 
 EXPOSE 80 443 2015
 VOLUME /root/.caddy /srv
@@ -93,7 +105,7 @@ WORKDIR /srv
 COPY Caddyfile /etc/Caddyfile
 COPY index.php /srv/index.php
 
-# install process wrapper
+# Install Process Wrapper
 COPY --from=builder /go/bin/parent /bin/parent
 
 ENTRYPOINT ["/bin/parent", "caddy"]

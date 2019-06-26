@@ -27,7 +27,12 @@ ENV ACME_AGREE="false"
 # Telemetry Stats
 ENV ENABLE_TELEMETRY="$enable_telemetry"
 
-RUN apk add --no-cache openssh-client git
+RUN apk add --no-cache \
+    ca-certificates \
+    git \
+    mailcap \
+    openssh-client \
+    tzdata
 
 # install caddy
 COPY --from=builder /install/caddy /usr/bin/caddy
