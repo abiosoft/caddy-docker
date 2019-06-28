@@ -42,7 +42,7 @@ RUN /usr/bin/caddy -version
 RUN /usr/bin/caddy -plugins
 
 EXPOSE 80 443 2015
-VOLUME /root/.caddy /srv
+VOLUME /root/.caddy /srv /root/.ssh
 WORKDIR /srv
 
 COPY Caddyfile /etc/Caddyfile
