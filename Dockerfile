@@ -3,7 +3,7 @@
 #
 FROM abiosoft/caddy:builder as builder
 
-ARG version="1.0.0"
+ARG version="1.0.1"
 ARG plugins="git,cors,realip,expires,cache"
 ARG enable_telemetry="true"
 
@@ -18,7 +18,7 @@ RUN VERSION=${version} PLUGINS=${plugins} ENABLE_TELEMETRY=${enable_telemetry} /
 FROM alpine:3.10
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
-ARG version="1.0.0"
+ARG version="1.0.1"
 LABEL caddy_version="$version"
 
 # Let's Encrypt Agreement
