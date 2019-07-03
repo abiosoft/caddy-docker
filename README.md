@@ -5,13 +5,13 @@ A [Docker](https://docker.com) image for [Caddy](https://caddyserver.com). This 
 Plugins can be configured via the [`plugins` build arg](#custom-plugins).
 
 [![](https://images.microbadger.com/badges/image/abiosoft/caddy.svg)](https://microbadger.com/images/abiosoft/caddy "Get your own image badge on microbadger.com")
-[![](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/mholt/caddy/tree/v1.0.0)
+[![](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/caddyserver/caddy/tree/v1.0.0)
 
 Check [abiosoft/caddy:builder](https://github.com/abiosoft/caddy-docker/blob/master/BUILDER.md) for generating cross-platform Caddy binaries.
 
 ### License
 
-This image is built from [source code](https://github.com/mholt/caddy). As such, it is subject to the project's [Apache 2.0 license](https://github.com/mholt/caddy/blob/baf6db5b570e36ea2fee30d50f879255a5895370/LICENSE.txt), but it neither contains nor is subject to [the EULA for Caddy's official binary distributions](https://github.com/mholt/caddy/blob/545fa844bbd188c1e5bff6926e5c410e695571a0/dist/EULA.txt).
+This image is built from [source code](https://github.com/caddyserver/caddy). As such, it is subject to the project's [Apache 2.0 license](https://github.com/caddyserver/caddy/blob/baf6db5b570e36ea2fee30d50f879255a5895370/LICENSE.txt), but it neither contains nor is subject to [the EULA for Caddy's official binary distributions](https://github.com/caddyserver/caddy/blob/545fa844bbd188c1e5bff6926e5c410e695571a0/dist/EULA.txt).
 
 ### Let's Encrypt Subscriber Agreement
 

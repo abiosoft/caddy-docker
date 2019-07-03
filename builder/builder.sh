@@ -53,7 +53,7 @@ module() {
 
     # setup module
     go mod init caddy
-    go get -v github.com/mholt/caddy@$VERSION
+    go get -v github.com/caddyserver/caddy@$VERSION
 
     # plugins
     cp -r /plugins/. .
@@ -61,7 +61,7 @@ module() {
     # main and telemetry
     cat > main.go <<EOF
     package main
-    import "github.com/mholt/caddy/caddy/caddymain"
+    import "github.com/caddyserver/caddy/caddy/caddymain"
     import "os"
     func main() {
         switch os.Getenv("ENABLE_TELEMETRY") {
@@ -78,13 +78,13 @@ EOF
 }
 
 legacy() {
-    cd /go/src/github.com/mholt/caddy/caddy # build dir
+    cd /go/src/github.com/caddyserver/caddy/caddy # build dir
 
     # plugins
     cp -r /plugins/. ../caddyhttp
 
     # telemetry
-    run_file="/go/src/github.com/mholt/caddy/caddy/caddymain/run.go"
+    run_file="/go/src/github.com/caddyserver/caddy/caddy/caddymain/run.go"
     if [ "$TELEMETRY" = "false" ]; then
         cat > "$run_file.disablestats.go" <<EOF
         package caddymain
@@ -105,8 +105,8 @@ EOF
 
 # caddy source
 stage "fetching caddy source"
-git clone https://github.com/mholt/caddy -b "$VERSION" /go/src/github.com/mholt/caddy \
-    && cd /go/src/github.com/mholt/caddy
+git clone https://github.com/caddyserver/caddy -b "$VERSION" /go/src/github.com/caddyserver/caddy \
+    && cd /go/src/github.com/caddyserver/caddy
 dns_plugins
 end_stage
 
@@ -117,7 +117,7 @@ end_stage
 
 # check for modules support
 go_mod=false
-[ -f /go/src/github.com/mholt/caddy/go.mod ] && export GO111MODULE=on && go_mod=true
+[ -f /go/src/github.com/caddyserver/caddy/go.mod ] && export GO111MODULE=on && go_mod=true
 
 # generate plugins
 stage "generating plugins"
