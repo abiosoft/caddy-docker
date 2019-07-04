@@ -49,7 +49,7 @@ get_package() {
 dns_plugins() {
     git clone https://github.com/caddyserver/dnsproviders /dnsproviders
     # temp hack for repo rename
-    $new_import && use_new_import /dnsproviders 
+    if $new_import; then use_new_import /dnsproviders; fi
 }
 
 plugins() {
@@ -76,7 +76,7 @@ module() {
 
     # temp hack for repo rename
     go get -v -d # download possible plugin deps
-    $new_import && use_new_import /go/pkg/mod
+    if $new_import; then use_new_import /go/pkg/mod; fi
 
     # main and telemetry
     cat > main.go <<EOF
