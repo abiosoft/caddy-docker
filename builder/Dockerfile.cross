@@ -1,4 +1,6 @@
-FROM golang:1.12-alpine
+FROM __BASEIMAGE_ARCH__/golang:1.12-alpine
+
+__CROSS_COPY .tmp/qemu/qemu-__QEMU_ARCH__-static /usr/bin/
 
 RUN apk add --no-cache git gcc musl-dev
 
