@@ -3,7 +3,7 @@
 #
 FROM abiosoft/caddy:builder as builder
 
-ARG version="1.0.1"
+ARG version="1.0.2"
 ARG plugins="git,cors,realip,expires,cache,cloudflare"
 ARG enable_telemetry="true"
 
@@ -18,7 +18,7 @@ RUN VERSION=${version} PLUGINS=${plugins} ENABLE_TELEMETRY=${enable_telemetry} /
 FROM alpine:3.10
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
-ARG version="1.0.1"
+ARG version="1.0.2"
 LABEL caddy_version="$version"
 
 # PHP www-user UID and GID
@@ -58,6 +58,7 @@ RUN apk add --no-cache \
   php7-openssl \
   php7-pdo \
   php7-pdo_mysql \
+  php7-pdo_pgsql \
   php7-pdo_sqlite \
   php7-pgsql \
   php7-phar \

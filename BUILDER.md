@@ -18,6 +18,6 @@ docker run --rm -v $(pwd):/install -e PLUGINS=git,filebrowser abiosoft/caddy:bui
 ### Environment Variables
 
 - `PLUGINS` - comma separated Caddy plugins. e.g. `-e PLUGINS=git,linode`
-- `VERSION` - Caddy version or repository branch. Default `1.0.1`
+- `VERSION` - Caddy version or repository branch. Default `1.0.2`
 - `ENABLE_TELEMETRY` - Enable telemetry stats. Options `true`|`false`. Default `true`
 - `GOOS`, `GOARCH` and `GOARM` are all supported. Default `GOOS=linux`, `GOARCH=amd64`
