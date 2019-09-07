@@ -1,0 +1,4 @@
+.tmp
+!.tmp/qemu
+.gitignore
+build.config
