@@ -54,12 +54,17 @@ dns_plugins() {
 
 plugins() {
     mkdir -p /plugins
-    for plugin in $(echo $PLUGINS | tr "," " "); do \
-        import_package=$(get_package $plugin)
-        $go_mod || go get -v "$import_package" ; # not needed for modules
-        $go_mod && package="main" || package="caddyhttp"
-        printf "package $package\nimport _ \"$import_package\"" > \
-            /plugins/$plugin.go ; \
+    local package="main"
+    $go_mod || package="caddyhttp"
+
+    for plugin in $(echo $PLUGINS | tr "," " "); do
+        local import_package=""
+        while [ -z $import_package ]; do
+            import_package="$(get_package $plugin)"
+        done
+        $go_mod || go get -v "$import_package" # not needed for modules
+        printf "package $package\nimport _ \"$import_package\"\n" > \
+            /plugins/$plugin.go
     done
 }
 
