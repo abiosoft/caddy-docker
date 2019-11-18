@@ -42,7 +42,7 @@ get_package() {
         cp -r /dnsproviders/$1/$1.go /caddy/dnsproviders/$1/$1.go
         echo "caddy/dnsproviders/$1"
     else
-        GO111MODULE=off GOOS=linux GOARCH=amd64 caddyplug package $1 2> /dev/null
+        GO111MODULE=off caddyplug package $1 2> /dev/null
     fi
 }
 
@@ -131,7 +131,7 @@ end_stage
 
 # plugin helper
 stage "installing plugin helper"
-GOOS=linux GOARCH=amd64 go get -v github.com/abiosoft/caddyplug/caddyplug
+go get -v github.com/abiosoft/caddyplug/caddyplug
 end_stage
 
 # check for modules support
@@ -155,7 +155,7 @@ end_stage
 
 # build
 stage "building caddy"
-CGO_ENABLED=0 go build -o caddy
+CGO_ENABLED=0 go build -ldflags '-w -s -extldflags "-static"' -o caddy
 end_stage
 
 # copy binary
