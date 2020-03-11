@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=${VERSION:-"1.0.3"}
+VERSION=${VERSION:-"1.0.4"}
 TELEMETRY=${ENABLE_TELEMETRY:-"true"}
 IMPORT="github.com/caddyserver/caddy"
 
