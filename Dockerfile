@@ -1,11 +1,11 @@
 #
 # Builder
 #
-FROM abiosoft/caddy:builder as builder
+FROM idearium/caddy-builder:1.0.3 as builder
 
 ARG version="1.0.3"
-ARG plugins="git,cors,realip,expires,cache,cloudflare"
-ARG enable_telemetry="true"
+ARG plugins="expires,minify,realip,route53"
+ARG enable_telemetry="false"
 
 # process wrapper
 RUN go get -v github.com/abiosoft/parent
