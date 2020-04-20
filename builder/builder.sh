@@ -155,7 +155,7 @@ end_stage
 
 # build
 stage "building caddy"
-CGO_ENABLED=0 go build -o caddy
+CGO_ENABLED=0 go build -ldflags '-w -s -extldflags "-static"' -o caddy
 end_stage
 
 # copy binary
