@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=${VERSION:-"1.0.3"}
+VERSION=${VERSION:-"2.0.0"}
 TELEMETRY=${ENABLE_TELEMETRY:-"true"}
 IMPORT="github.com/caddyserver/caddy"
 
@@ -131,7 +131,7 @@ end_stage
 
 # plugin helper
 stage "installing plugin helper"
-GOOS=linux GOARCH=amd64 go get -v github.com/abiosoft/caddyplug/caddyplug
+GOOS=linux go get -v github.com/abiosoft/caddyplug/caddyplug
 end_stage
 
 # check for modules support
