@@ -25,4 +25,4 @@ jobs:
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
       
     - name: Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/caddyreauth
+      run: docker push $DOCKER_USER/caddyreauth
